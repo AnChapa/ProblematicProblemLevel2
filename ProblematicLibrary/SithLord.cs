@@ -13,7 +13,23 @@ namespace ProblematicLibrary
     {
         public static void ExecuteOrder66()
         {
-            Process.Start("explorer.exe", $@"{Directory.GetCurrentDirectory()}\OldManCanoli.jpg");
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "OldManCanoli.jpg");
+
+            if (File.Exists(imagePath))
+            {
+                try
+                {
+                    Process.Start("explorer.exe", imagePath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error opening image: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("The Jedi have won.");
+            }
         }
     }
 }

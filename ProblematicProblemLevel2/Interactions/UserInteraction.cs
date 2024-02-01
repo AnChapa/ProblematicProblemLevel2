@@ -1,6 +1,7 @@
 ﻿using ProblematicLibrary;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace ProblematicProblemLevel2.Interaction
         {
             int age;
 
-            while (int.TryParse(GetUserInput(), out age))
+            while (!int.TryParse(GetUserInput(), out age))
             {
                 ConsoleLogging.PassMessage("That is not a number\nTry again...", StatusCode.Error);
             }
@@ -34,7 +35,7 @@ namespace ProblematicProblemLevel2.Interaction
         {
             DateTime dob;
 
-            while (DateTime.TryParse(GetUserInput(), out dob))
+            while (!DateTime.TryParseExact(GetUserInput(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dob))
             {
                 ConsoleLogging.PassMessage("That is not a valid dob please do dd/mm/yyyy \nTry again...", StatusCode.Error);
             }
@@ -42,11 +43,11 @@ namespace ProblematicProblemLevel2.Interaction
             return dob;
         }
 
-        internal static int GetUserNumber()
+        internal static double GetUserNumber()
         {
-            int num;
+            double num;
 
-            while (int.TryParse(GetUserInput(), out num))
+            while (!double.TryParse(GetUserInput(), out num))
             {
                 ConsoleLogging.PassMessage("That is not a valid number \nTry again...", StatusCode.Error);
             }
